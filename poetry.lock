@@ -983,6 +983,24 @@ testing = ["covdefaults (>=2.3)", "coverage (>=7.6.10)", "diff-cover (>=9.2.1)",
 typing = ["typing-extensions (>=4.12.2)"]
 
 [[package]]
+name = "flash_attn"
+version = "2.7.4.post1"
+description = "Flash Attention: Fast and Memory-Efficient Exact Attention"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "flash_attn-2.7.4.post1+cu12torch2.5cxx11abiFALSE-cp312-cp312-linux_x86_64.whl", hash = "sha256:a496f383c843ed0cc6e01302556a0947f56828f1ec2b54e5297c4c7eaae39357"},
+]
+
+[package.dependencies]
+einops = "*"
+torch = "*"
+
+[package.source]
+type = "url"
+url = "https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.5cxx11abiFALSE-cp312-cp312-linux_x86_64.whl"
+
+[[package]]
 name = "fonttools"
 version = "4.56.0"
 description = "Tools to manipulate font files"
@@ -4995,4 +5013,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "acbe92dffd32dce8a3c42f6f7724dba21fb6be1eac31575614155027a8455761"
+content-hash = "09dc9c56dd21e92c5dd19bbf70c4898d4ea425e73c1b6a52f4021388947977a8"
