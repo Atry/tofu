@@ -74,11 +74,13 @@
                   javascript.enable = true;
                   c.enable = true;
                   python = {
+                    poetry.enable = true;
+                    
                     enable = true;
-                    venv = {
-                      enable = true;
-                      requirements = lib.fileContents ./requirements.txt;
-                    };
+                    # venv = {
+                    #   enable = true;
+                    #   requirements = lib.fileContents ./requirements.txt;
+                    # };
                   };
                 };
               };

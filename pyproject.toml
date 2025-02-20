@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "tofu"
+version = "1.0.0"
+description = ""
+authors = []
+readme = "README.md"
+packages = [{ include = "**/*.py" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+transformers = "^4.48.3"
+scipy = "^1.15.1"
+matplotlib = "^3.10.0"
+datasets = "^3.2.0"
+accelerate = "^1.3.0"
+deepspeed = "^0.16.3"
+evaluate = "^0.4.3"
+hydra-core = "^1.3.2"
+omegaconf = "^2.3.0"
+peft = "^0.14.0"
+rouge_score = "^0.1.2"
+tqdm = "^4.67.1"
+einops = "^0.8.1"
+packaging = "^24.2"
+bitsandbytes = "^0.45.2"
+ninja = "^1.11.1.3"
+natsort = "^8.4.0"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+ipywidgets = "^8.1.5"
+jupyter-collaboration = "^3.1.0"
+jupyterlab = "^4.3.5"
+
+# See https://github.com/msm1089/ipynbname/pull/28
+ipynbname = { git = "https://github.com/Atry/ipynbname", branch = "patch-1" }
+rich = "^13.9.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
