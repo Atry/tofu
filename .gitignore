@@ -34,3 +34,6 @@ result
 
 # nixago: ignore-linked-files
 /.vscode/extensions.json
+
+.ipynb_checkpoints/
+.jupyter_ystore.db*
