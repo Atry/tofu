@@ -60,13 +60,13 @@ def eval_perturbation_ratio(eval_dataloader, perturb_dataloader, model):
 
 
         # zip index and each stat into a dict
-        perturb_loss_per_token = dict(zip(indices.cpu().numpy().tolist(), perturb_loss_per_token.cpu().numpy().tolist()))
-        gt_loss_per_token = dict(zip(indices.cpu().numpy().tolist(), gt_loss_per_token.cpu().numpy().tolist()))
-        truth_ratio = dict(zip(indices.cpu().numpy().tolist(), truth_ratio.cpu().numpy().tolist()))
-        gt_loss = dict(zip(indices.cpu().numpy().tolist(), gt_loss.cpu().numpy().tolist()))
-        perturb_loss = dict(zip(indices.cpu().numpy().tolist(), perturb_loss.cpu().numpy().tolist()))
-        num_token_gt = dict(zip(indices.cpu().numpy().tolist(), num_token_gt.cpu().numpy().tolist()))
-        num_token_perturb = dict(zip(indices.cpu().numpy().tolist(), num_token_perturb.cpu().numpy().tolist()))
+        perturb_loss_per_token = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), perturb_loss_per_token.to("cpu", dtype=torch.float32).numpy().tolist()))
+        gt_loss_per_token = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), gt_loss_per_token.to("cpu", dtype=torch.float32).numpy().tolist()))
+        truth_ratio = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), truth_ratio.to("cpu", dtype=torch.float32).numpy().tolist()))
+        gt_loss = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), gt_loss.to("cpu", dtype=torch.float32).numpy().tolist()))
+        perturb_loss = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), perturb_loss.to("cpu", dtype=torch.float32).numpy().tolist()))
+        num_token_gt = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), num_token_gt.to("cpu", dtype=torch.float32).numpy().tolist()))
+        num_token_perturb = dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), num_token_perturb.to("cpu", dtype=torch.float32).numpy().tolist()))
 
 
         # merge dicts
@@ -155,7 +155,7 @@ def get_all_evals(cfg, model, tokenizer, eval_task, eval_dataloader, base_eval_d
 
     for batch in tqdm(eval_dataloader):
         input_ids, labels, attention_mask, indices = batch
-        all_indices.extend(indices.cpu().numpy().tolist())
+        all_indices.extend(indices.to("cpu", dtype=torch.float32).numpy().tolist())
         batch = {"input_ids": input_ids, "labels": labels, "attention_mask": attention_mask}
         #send to device
         for k, v in batch.items():
@@ -181,10 +181,10 @@ def get_all_evals(cfg, model, tokenizer, eval_task, eval_dataloader, base_eval_d
         if 'generated_text' not in eval_logs:
             eval_logs['generated_text'] = {}
         # print(gt_loss.shape, num_token_gt.shape)
-        eval_logs['avg_gt_loss'].update(dict(zip(indices.cpu().numpy().tolist(), gt_loss_per_token.cpu().numpy().tolist())))
-        eval_logs['gt_loss'].update(dict(zip(indices.cpu().numpy().tolist(), gt_loss.cpu().numpy().tolist())))
-        eval_logs['num_token_gt'].update(dict(zip(indices.cpu().numpy().tolist(), num_token_gt.cpu().numpy().tolist())))
-        eval_logs['generated_text'].update(dict(zip(indices.cpu().numpy().tolist(), zip(input_string, gen_output,gt))))
+        eval_logs['avg_gt_loss'].update(dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), gt_loss_per_token.to("cpu", dtype=torch.float32).numpy().tolist())))
+        eval_logs['gt_loss'].update(dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), gt_loss.to("cpu", dtype=torch.float32).numpy().tolist())))
+        eval_logs['num_token_gt'].update(dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), num_token_gt.to("cpu", dtype=torch.float32).numpy().tolist())))
+        eval_logs['generated_text'].update(dict(zip(indices.to("cpu", dtype=torch.float32).numpy().tolist(), zip(input_string, gen_output,gt))))
 
 
     eval_logs.update(eval_rouge_recall(gen_outputs, ground_truths, all_indices))
