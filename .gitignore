@@ -28,3 +28,9 @@ upload_to_hf.py
 
 .devenv/
 .direnv/
+.envrc.private
+result
+.pre-commit-config.yaml
+
+# nixago: ignore-linked-files
+/.vscode/extensions.json
