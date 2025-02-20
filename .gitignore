@@ -26,3 +26,5 @@ scripts/
 reproduce.ipynb
 upload_to_hf.py
 
+.devenv/
+.direnv/
