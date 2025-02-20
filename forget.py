@@ -6,6 +6,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, set_se
 import hydra 
 import transformers
 import os
+import sys
 from peft import LoraConfig, get_peft_model, PeftModel
 from pathlib import Path
 from utils import get_model_identifiers_from_yaml
@@ -60,9 +61,9 @@ def main(cfg):
     # save cfg in cfg.save_dir
     if local_rank == 0:
         if os.path.exists(cfg.save_dir):
-            print("Directory already exists")
+            print("Directory already exists", file=sys.stderr)
             if not cfg.overwrite_dir:
-                exit()
+                exit(-1)
 
         Path(cfg.save_dir).mkdir(parents=True, exist_ok=True)
 
